@@ -1,0 +1,10 @@
+@import "../../styles/index.scss";
+
+.text {
+    display: inline-block;
+
+    font-size: clamp(22px, 4vw, 35px);
+    color: $accent-color;
+//    font-size: clamp(22px, 2.5vw, 34px);
+    margin-bottom: clamp(10px, 1vw, 20px);
+}

@@ -1,0 +1,13 @@
+.buttonWraper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: clamp(10px, 1vw, 15px);
+
+    button {
+        margin-right: clamp(5px, 1vw, 10px)
+    }
+}

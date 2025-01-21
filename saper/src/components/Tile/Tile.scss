@@ -1,22 +1,29 @@
+@import "../../styles/index.scss";
+
 .tile {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    background-color: $secondary-color;
     width: clamp( 40px, 9vw, 80px );
     height: clamp( 40px, 9vw, 80px );
-    margin: 5px;
-    color: white;
-    background-color: #343028;
-    position: relative;
 
+    font-size: 20px;
+    color: $accent-color;
+
+    margin: 5px;
     div {
+        position: absolute;
         display: block;
         width: 100%;
         height: 100%;
-        position: absolute;
-        background-color: #343028;
+        background-color: $secondary-color;
 
-        transition: opacity .4s;
+        transition: opacity .3s;
     }
+}
+
+.hideTile {
+    opacity: 0;
 }

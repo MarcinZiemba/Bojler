@@ -1,0 +1,13 @@
+@import "../../styles/index.scss";
+
+.timer {
+    display: flex;
+    justify-self: center;
+    border: 1px solid $accent-color;
+
+    padding: clamp(1px, 1.3vw, 4px) clamp(4px, 1.6vw, 18px);
+    margin-bottom: clamp( 5px, 0.8vw, 14px);
+    p {
+        margin-bottom: 0px;
+    }
+}

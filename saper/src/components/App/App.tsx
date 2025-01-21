@@ -1,64 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/App.scss';
-import Board from '../Board/Board';
-import BoardRow from "../BoardRow/BoardRow"
+import "./App.scss"
 
-import generateBoard from "../../utils/generateBoard"
+import MainGame from "../MainGame/MainGame"
+import AfterGameScreen from "../AfterGameScreen/AfterGameScreen"
 
 function App() {
-  const [ gridSize, setGridSize ] = useState<number>(5)
-  const [ numberOfMines, setNumberOfMines ] = useState<number>(4)
-  const [ boardData, setBoardData ] = useState<number[][]>([])
-  const [ noMineTilesCount, setNoMineTilesCount ] = useState(0)
+  const [ restartGame, setRestartGame ] = useState(false)
+  const [ restartGameScreen, setRestartGameScreen ] = useState(false)
+  const [ timer, setTimer ] = useState(0)
+  const [ currentInterval, setCurrentInterval ] = useState<NodeJS.Timeout>()
 
-  //Twrzenie planszy
   useEffect(() => {
-    generateBoard( gridSize, numberOfMines, setBoardData , true)
-  },[ gridSize ])
+    if( restartGame ) {
+      const allTileCovers = document.querySelectorAll<HTMLElement>("#cover")
 
-  //Logika kliknięć na pola
-  useEffect(() => {
-    const allTileCovers = document.querySelectorAll<HTMLElement>("#cover")
-    
-    allTileCovers.forEach(( node ) => {
-      if(node instanceof  HTMLElement) {
-        const tileValue = node.parentElement?.textContent
-
-        node.onclick = ( event ) => {
-          node.onclick = ()=>{};
-
-          if( tileValue === "-1" ) {
-            console.log("przegrales")
-            return;
-          } 
-          
-          node.style.opacity = "0"
-          setNoMineTilesCount(( prev ) =>  prev + 1 )
-        }
-      }
-    })
-  },[ boardData ])
-
-  //Wygrana
-  useEffect(() => {
-    if( noMineTilesCount - numberOfMines === Math.pow( gridSize, 2 ) ){
-      console.log("wygrałeś")
+      setRestartGameScreen( false )
+      setTimer(0);
+      setRestartGame( false )
+      allTileCovers.forEach( node => {
+        if( node.classList.contains("hideTile") )  node.classList.remove("hideTile")
+      })
     }
-  },[ noMineTilesCount ])
+  }, [ restartGame ])
 
-  console.log(noMineTilesCount)
+  useEffect(() => {
+    if(restartGame || restartGameScreen){
+      clearInterval( currentInterval )
+    }else if (timer === -1) {
+      setTimer(1)
+
+      let interval = setInterval(() => {
+        setTimer(prevState => prevState + 1)
+      }, 1000)
+
+      setCurrentInterval( interval );
+    }
+  }, [ timer ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <Board>
-          {
-            Array( gridSize )
-              .fill(0)
-              .map(( element, rowNumber ) => ( <BoardRow rowNumber={ rowNumber } rowData={ boardData[ rowNumber ] ?? 0 } /> ))
-          }
-        </Board>
-      </header>
+      <MainGame setRestartGame={ setRestartGame } setRestartGameScreen={ setRestartGameScreen }
+                  restartGame={ restartGame } timer={ timer } setTimer={ setTimer }/>
+      {restartGameScreen ? <AfterGameScreen setRestartGame={ setRestartGame } timer={ timer }/> : ""}
     </div>
   );
 }

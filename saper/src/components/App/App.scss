@@ -1,0 +1,17 @@
+@import "../../styles/index.scss";
+
+.App {
+  text-align: center;
+
+  position: relative;
+}
+
+.App-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  background-color: $primary-color;
+  min-height: 100vh;
+}

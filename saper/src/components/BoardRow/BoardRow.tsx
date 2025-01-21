@@ -8,16 +8,12 @@ interface BoardProps extends React.HtmlHTMLAttributes<HTMLElement> {
 }
 
 const Board = ({ rowData, rowNumber, children, ...props } : BoardProps) => {
-    useEffect(()=>{
-        
-    },[])
-
   return (
         <div className="boardRow" { ...props }>
             {
                 Array( rowData.length )
                 .fill(0)
-                .map(( element, taleNumber ) => <Tile rowNumber={ taleNumber }>{ rowData[ taleNumber ] }</Tile> )
+                .map(( element, taleNumber ) => <Tile rowNumber={ taleNumber } key={ taleNumber }>{ rowData[ taleNumber ] }</Tile> )
             }            
         </div>
     )

@@ -1,0 +1,25 @@
+.input {
+    display: inline-block;
+    align-items:flex-end;
+    width: clamp(30px, 4vw, 48px);
+    vertical-align:top;
+
+    text-align: center;
+    font-size: clamp(13px, 1vw, 19.2px);
+    font-weight: bold;
+    border-radius: 4px;
+    
+    padding: clamp(3px, 1.3vw, 8px) 0px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
