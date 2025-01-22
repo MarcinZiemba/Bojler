@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss"
 
 import MainGame from "../MainGame/MainGame"
@@ -9,11 +10,14 @@ function App() {
   const [ restartGameScreen, setRestartGameScreen ] = useState(false)
   const [ timer, setTimer ] = useState(0)
   const [ currentInterval, setCurrentInterval ] = useState<NodeJS.Timeout>()
+  const [ victory, setVictory ] = useState( false )
 
   useEffect(() => {
     if( restartGame ) {
       const allTileCovers = document.querySelectorAll<HTMLElement>("#cover")
 
+      if( victory ) setVictory( false )
+        
       setRestartGameScreen( false )
       setTimer(0);
       setRestartGame( false )
@@ -38,11 +42,11 @@ function App() {
   }, [ timer ])
 
   return (
-    <div className="App">
-      <MainGame setRestartGame={ setRestartGame } setRestartGameScreen={ setRestartGameScreen }
-                  restartGame={ restartGame } timer={ timer } setTimer={ setTimer }/>
-      {restartGameScreen ? <AfterGameScreen setRestartGame={ setRestartGame } timer={ timer }/> : ""}
-    </div>
+      <div className="App">
+        <MainGame setRestartGameScreen={ setRestartGameScreen } setVictory={ setVictory } setRestartGame={ setRestartGame }
+                    restartGame={ restartGame } timer={ timer } setTimer={ setTimer }/>
+        {restartGameScreen ? <AfterGameScreen setRestartGame={ setRestartGame } victory={ victory } timer={ timer }/> : ""}
+      </div>
   );
 }
 

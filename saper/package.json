@@ -37,5 +37,8 @@
   },
   "compilerOptions": {
     "jsx": "react"
+  },
+  "devDependencies": {
+    "react-router-dom": "^7.1.3"
   }
 }

@@ -7,10 +7,11 @@ import convertTime from '../../utils/convertTime'
 
 interface afterGameScreenProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     setRestartGame: React.Dispatch<React.SetStateAction<boolean>>,
+    victory: boolean,
     timer: number
 }
 
-const AfterGameScreen = ({ setRestartGame, timer }: afterGameScreenProps) => {
+const AfterGameScreen = ({ setRestartGame, victory , timer }: afterGameScreenProps) => {
   const time = convertTime(timer)
 
   return (
@@ -25,7 +26,7 @@ const AfterGameScreen = ({ setRestartGame, timer }: afterGameScreenProps) => {
                 <Input type="text" placeholder='Name'/>
                 <div>
                     <Button onClick={ () => setRestartGame(true) }>Restart</Button>
-                    <Button style={{ marginLeft: "clamp(5px, 1.2vw, 22px)" }}>Submit</Button>
+                    { victory ? <Button style={{ marginLeft: "clamp(5px, 1.2vw, 22px)" }}>Submit</Button> : ""}
                 </div>
             </div>
         </div>
