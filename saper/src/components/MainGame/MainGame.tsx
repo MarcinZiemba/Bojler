@@ -7,7 +7,6 @@ import {
 
 import Board from '../Board/Board';
 import BoardRow from "../BoardRow/BoardRow"
-import CommonButton from "../Button/Button"
 import ButtonWraper from '../ButtonWrapper/ButtonWraper';
 import Input from "../Input/Input"
 import Text from "../Text/Text"
@@ -67,11 +66,15 @@ const MainGame = ( { restartGame, setRestartGame, setVictory, setRestartGameScre
     //Wygrana
     useEffect(() => {
       if( noMineTilesCount === Math.pow( gridSize, 2 ) - numberOfMines ){
+        localStorage.setItem("gridSize", String( gridSize ))
+        localStorage.setItem("timer", String( timer ))
+        localStorage.setItem("numberOfMines", String( numberOfMines ))
+
         setRestartGameScreen( true )
         setVictory( true )
       }
     },[ noMineTilesCount, numberOfMines ])   
-    
+
     const changeGridSize = ( nGrid: number ) => {
       setGridSize( nGrid );
       setRestartGame( true )
@@ -94,10 +97,10 @@ const MainGame = ( { restartGame, setRestartGame, setVictory, setRestartGameScre
         <div>
           <Timer timer={ timer }></Timer>
           <ButtonWraper>
-            <CommonButton onClick={ () => changeGridSize( 4 ) }>4 x 4</CommonButton>
-            <CommonButton onClick={() => changeGridSize( 5 )}>5 x 5</CommonButton>
-            <CommonButton onClick={() => changeGridSize( 6 )}>6 x 6</CommonButton>
-            <CommonButton onClick={() => changeGridSize( 7 )}>7 x 7</CommonButton>
+            <Button onClick={() => changeGridSize( 4 )} active={ gridSize === 4 }>4 x 4</Button>
+            <Button onClick={() => changeGridSize( 5 )} active={ gridSize === 5 }>5 x 5</Button>
+            <Button onClick={() => changeGridSize( 6 )} active={ gridSize === 6 }>6 x 6</Button>
+            <Button onClick={() => changeGridSize( 7 )} active={ gridSize === 7 }>7 x 7</Button>
           </ButtonWraper>
           <div>
             <Text marginRight={ true }>Enter number of bombs:</Text>

@@ -1,0 +1,23 @@
+.dataContainer {
+    width: clamp(200px, 45vw, 700px);
+}
+.dataRow {
+    display: flex;
+    width: clamp(200px, 45vw, 700px);
+    justify-content: flex-end;
+    position: relative;
+    div {
+        display: flex;
+    }
+    p {
+        &:first-child {
+            position: absolute;
+            left: 0px;
+            display: flex;
+        }
+    }
+    div p {
+        position: inherit !important;
+        left: auto;
+    }
+}

@@ -39,7 +39,7 @@ function App() {
 
       setCurrentInterval( interval );
     }
-  }, [ timer ])
+  }, [ timer, restartGame ])
 
   return (
       <div className="App">
